@@ -1,0 +1,21 @@
+[0.541s] Invoking command in '/home/rawfed/Programming/simulasi-2027_ws/src/itsr_simulasi-2027/robocon_2027_webots': PYTHONPATH=/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/robocon_2027_webots build --build-base /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build install --record /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/install.log --install-scripts $base/lib/robocon_2027_webots --single-version-externally-managed install_data
+[0.690s] running egg_info
+[0.691s] writing ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/PKG-INFO
+[0.691s] writing dependency_links to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/dependency_links.txt
+[0.691s] writing entry points to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/entry_points.txt
+[0.691s] writing requirements to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/requires.txt
+[0.691s] writing top-level names to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/top_level.txt
+[0.692s] reading manifest file '../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/SOURCES.txt'
+[0.693s] writing manifest file '../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/SOURCES.txt'
+[0.693s] running build
+[0.693s] running build_py
+[0.693s] running install
+[0.693s] running install_lib
+[0.694s] running install_data
+[0.694s] running install_egg_info
+[0.695s] removing '/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots-0.0.0-py3.10.egg-info' (and everything under it)
+[0.695s] Copying ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info to /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots-0.0.0-py3.10.egg-info
+[0.696s] running install_scripts
+[0.711s] Installing tr_webots_driver script to /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/robocon_2027_webots
+[0.711s] writing list of installed files to '/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/install.log'
+[0.730s] Invoked command in '/home/rawfed/Programming/simulasi-2027_ws/src/itsr_simulasi-2027/robocon_2027_webots' returned '0': PYTHONPATH=/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/robocon_2027_webots build --build-base /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build install --record /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/install.log --install-scripts $base/lib/robocon_2027_webots --single-version-externally-managed install_data

@@ -1,0 +1,3 @@
+[console_scripts]
+keyboard_control = robocon_2027_control.keyboard_control:main
+

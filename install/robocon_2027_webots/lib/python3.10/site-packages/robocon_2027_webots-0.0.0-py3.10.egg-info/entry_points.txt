@@ -1,0 +1,3 @@
+[console_scripts]
+tr_webots_driver = robocon_2027_webots.tr_webots_driver:main
+

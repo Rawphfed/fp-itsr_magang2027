@@ -1,0 +1,54 @@
+running egg_info
+creating ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info
+writing ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/PKG-INFO
+writing dependency_links to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/dependency_links.txt
+writing entry points to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/entry_points.txt
+writing requirements to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/requires.txt
+writing top-level names to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/top_level.txt
+writing manifest file '../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/SOURCES.txt'
+reading manifest file '../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/SOURCES.txt'
+writing manifest file '../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build
+creating /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib
+creating /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib/robocon_2027_webots
+copying robocon_2027_webots/__init__.py -> /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib/robocon_2027_webots
+copying robocon_2027_webots/tr_webots_driver.py -> /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib/robocon_2027_webots
+running install
+running install_lib
+creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots
+copying /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib/robocon_2027_webots/__init__.py -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots
+copying /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib/robocon_2027_webots/tr_webots_driver.py -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots
+byte-compiling /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots/tr_webots_driver.py to tr_webots_driver.cpython-310.pyc
+running install_data
+creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/ament_index
+creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/ament_index/resource_index
+creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/ament_index/resource_index/packages
+copying resource/robocon_2027_webots -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/ament_index/resource_index/packages
+copying package.xml -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots
+creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/launch
+copying launch/simulation.launch.py -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/launch
+creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds
+copying worlds/simple_arena.wbt -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds
+creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+copying worlds/textures/level_1.png -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+copying worlds/textures/level1_merah(1).png -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+copying worlds/textures/ground.png -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+copying worlds/textures/level2.png -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+copying worlds/textures/level1_biru(1).png -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+copying protos/TRRobot.proto -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+copying protos/SkyBlock.proto -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+copying protos/EarthBlock.proto -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+copying protos/Mustika.proto -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+copying protos/Belajar_TRRobot.proto -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/urdf
+copying urdf/tr_webots.urdf -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/urdf
+copying urdf/br_webots.urdf -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/urdf
+running install_egg_info
+Copying ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info to /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots-0.0.0-py3.10.egg-info
+running install_scripts
+Installing tr_webots_driver script to /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/robocon_2027_webots
+writing list of installed files to '/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/install.log'

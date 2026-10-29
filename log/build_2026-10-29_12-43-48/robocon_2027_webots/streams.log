@@ -1,0 +1,56 @@
+[0.572s] Invoking command in '/home/rawfed/Programming/simulasi-2027_ws/src/itsr_simulasi-2027/robocon_2027_webots': PYTHONPATH=/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/robocon_2027_webots build --build-base /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build install --record /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/install.log --install-scripts $base/lib/robocon_2027_webots --single-version-externally-managed install_data
+[0.743s] running egg_info
+[0.744s] creating ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info
+[0.744s] writing ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/PKG-INFO
+[0.744s] writing dependency_links to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/dependency_links.txt
+[0.745s] writing entry points to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/entry_points.txt
+[0.745s] writing requirements to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/requires.txt
+[0.745s] writing top-level names to ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/top_level.txt
+[0.746s] writing manifest file '../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/SOURCES.txt'
+[0.747s] reading manifest file '../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/SOURCES.txt'
+[0.747s] writing manifest file '../../../build/robocon_2027_webots/robocon_2027_webots.egg-info/SOURCES.txt'
+[0.747s] running build
+[0.747s] running build_py
+[0.747s] creating /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build
+[0.748s] creating /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib
+[0.748s] creating /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib/robocon_2027_webots
+[0.748s] copying robocon_2027_webots/__init__.py -> /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib/robocon_2027_webots
+[0.749s] copying robocon_2027_webots/tr_webots_driver.py -> /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib/robocon_2027_webots
+[0.749s] running install
+[0.749s] running install_lib
+[0.749s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots
+[0.749s] copying /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib/robocon_2027_webots/__init__.py -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots
+[0.749s] copying /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build/lib/robocon_2027_webots/tr_webots_driver.py -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots
+[0.749s] byte-compiling /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots/__init__.py to __init__.cpython-310.pyc
+[0.750s] byte-compiling /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots/tr_webots_driver.py to tr_webots_driver.cpython-310.pyc
+[0.750s] running install_data
+[0.750s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/ament_index
+[0.750s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/ament_index/resource_index
+[0.750s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/ament_index/resource_index/packages
+[0.751s] copying resource/robocon_2027_webots -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/ament_index/resource_index/packages
+[0.751s] copying package.xml -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots
+[0.752s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/launch
+[0.752s] copying launch/simulation.launch.py -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/launch
+[0.752s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds
+[0.753s] copying worlds/simple_arena.wbt -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds
+[0.754s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+[0.754s] copying worlds/textures/level_1.png -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+[0.755s] copying worlds/textures/level1_merah(1).png -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+[0.756s] copying worlds/textures/ground.png -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+[0.756s] copying worlds/textures/level2.png -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+[0.756s] copying worlds/textures/level1_biru(1).png -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/worlds/textures
+[0.756s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+[0.756s] copying protos/TRRobot.proto -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+[0.756s] copying protos/SkyBlock.proto -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+[0.757s] copying protos/EarthBlock.proto -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+[0.757s] copying protos/Mustika.proto -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+[0.757s] copying protos/Belajar_TRRobot.proto -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/protos
+[0.757s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/urdf
+[0.757s] copying urdf/tr_webots.urdf -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/urdf
+[0.757s] copying urdf/br_webots.urdf -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/share/robocon_2027_webots/urdf
+[0.757s] running install_egg_info
+[0.758s] Copying ../../../build/robocon_2027_webots/robocon_2027_webots.egg-info to /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages/robocon_2027_webots-0.0.0-py3.10.egg-info
+[0.758s] running install_scripts
+[0.773s] Installing tr_webots_driver script to /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/robocon_2027_webots
+[0.773s] writing list of installed files to '/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/install.log'
+[0.789s] Invoked command in '/home/rawfed/Programming/simulasi-2027_ws/src/itsr_simulasi-2027/robocon_2027_webots' returned '0': PYTHONPATH=/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_webots/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/robocon_2027_webots build --build-base /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/build install --record /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_webots/install.log --install-scripts $base/lib/robocon_2027_webots --single-version-externally-managed install_data

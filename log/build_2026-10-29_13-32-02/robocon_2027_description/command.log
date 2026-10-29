@@ -1,0 +1,4 @@
+Invoking command in '/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_description -- -j12 -l12
+Invoked command in '/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_description -- -j12 -l12
+Invoking command in '/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_description
+Invoked command in '/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_description

@@ -1,0 +1,33 @@
+[0.395s] Invoking command in '/home/rawfed/Programming/simulasi-2027_ws/src/robocon_2027_control': PYTHONPATH=/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/robocon_2027_control build --build-base /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/build install --record /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/install.log --install-scripts $base/lib/robocon_2027_control --single-version-externally-managed install_data
+[0.535s] running egg_info
+[0.535s] creating ../../build/robocon_2027_control/robocon_2027_control.egg-info
+[0.535s] writing ../../build/robocon_2027_control/robocon_2027_control.egg-info/PKG-INFO
+[0.536s] writing dependency_links to ../../build/robocon_2027_control/robocon_2027_control.egg-info/dependency_links.txt
+[0.536s] writing entry points to ../../build/robocon_2027_control/robocon_2027_control.egg-info/entry_points.txt
+[0.536s] writing requirements to ../../build/robocon_2027_control/robocon_2027_control.egg-info/requires.txt
+[0.536s] writing top-level names to ../../build/robocon_2027_control/robocon_2027_control.egg-info/top_level.txt
+[0.536s] writing manifest file '../../build/robocon_2027_control/robocon_2027_control.egg-info/SOURCES.txt'
+[0.537s] reading manifest file '../../build/robocon_2027_control/robocon_2027_control.egg-info/SOURCES.txt'
+[0.538s] writing manifest file '../../build/robocon_2027_control/robocon_2027_control.egg-info/SOURCES.txt'
+[0.538s] running build
+[0.538s] running build_py
+[0.538s] creating /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/build
+[0.538s] creating /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/build/lib
+[0.538s] creating /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/build/lib/robocon_2027_control
+[0.538s] copying robocon_2027_control/__init__.py -> /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/build/lib/robocon_2027_control
+[0.538s] running install
+[0.539s] running install_lib
+[0.539s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control
+[0.539s] copying /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/build/lib/robocon_2027_control/__init__.py -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control
+[0.540s] byte-compiling /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/__init__.py to __init__.cpython-310.pyc
+[0.540s] running install_data
+[0.540s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/share/ament_index
+[0.540s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/share/ament_index/resource_index
+[0.541s] creating /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/share/ament_index/resource_index/packages
+[0.541s] copying resource/robocon_2027_control -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/share/ament_index/resource_index/packages
+[0.541s] copying package.xml -> /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/share/robocon_2027_control
+[0.541s] running install_egg_info
+[0.542s] Copying ../../build/robocon_2027_control/robocon_2027_control.egg-info to /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control-0.0.0-py3.10.egg-info
+[0.542s] running install_scripts
+[0.557s] writing list of installed files to '/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/install.log'
+[0.573s] Invoked command in '/home/rawfed/Programming/simulasi-2027_ws/src/robocon_2027_control' returned '0': PYTHONPATH=/home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/robocon_2027_control build --build-base /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/build install --record /home/rawfed/Programming/simulasi-2027_ws/build/robocon_2027_control/install.log --install-scripts $base/lib/robocon_2027_control --single-version-externally-managed install_data
