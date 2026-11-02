@@ -1,0 +1,230 @@
+{
+  "configById": {
+    "3D!3127koi": {
+      "topics": {
+        "/robot_description": {
+          "visible": true
+        },
+        "/move_base_simple/goal": {
+          "visible": false
+        },
+        "/initialpose": {
+          "visible": false
+        }
+      },
+      "layers": {
+        "834396ef-9c70-4e58-aedd-ec229829d08a": {
+          "layerId": "foxglove.Grid",
+          "instanceId": "834396ef-9c70-4e58-aedd-ec229829d08a"
+        }
+      },
+      "cameraState": {
+        "perspective": true,
+        "distance": 8.802533373034555,
+        "phi": 69.79866297105059,
+        "thetaOffset": -146.7163373161737,
+        "targetOffset": [
+          -0.05865296759001028,
+          0.08511237354269646,
+          1.4970368640237871e-16
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "targetOrientation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "followMode": "follow-pose",
+      "scene": {
+        "enableStats": false,
+        "ignoreColladaUpAxis": false,
+        "transforms": {
+          "visible": true
+        }
+      },
+      "transforms": {
+        "frame:base_footprint": {
+          "visible": false
+        },
+        "frame:base_link": {
+          "visible": true
+        },
+        "frame:front_left_wheel_link": {
+          "visible": false
+        },
+        "frame:front_right_wheel_link": {
+          "visible": false
+        },
+        "frame:rear_right_wheel_link": {
+          "visible": false
+        },
+        "frame:rear_left_wheel_link": {
+          "visible": false
+        }
+      },
+      "publish": {
+        "type": "point",
+        "poseTopic": "/move_base_simple/goal",
+        "pointTopic": "/clicked_point",
+        "poseEstimateTopic": "/initialpose",
+        "poseEstimateXDeviation": 0.5,
+        "poseEstimateYDeviation": 0.5,
+        "poseEstimateThetaDeviation": 0.26179939
+      },
+      "synchronize": false,
+      "imageMode": {}
+    },
+    "Plot!1n5jtc0": {
+      "paths": [
+        {
+          "value": "/cmd_vel.linear.x",
+          "enabled": true,
+          "color": "#4e98e2",
+          "id": "e9873da1-e08f-43e6-8867-62ff61c2c251"
+        },
+        {
+          "value": "/cmd_vel.linear.y",
+          "enabled": true,
+          "color": "#f5774d",
+          "id": "d34d65fe-9411-4046-8a18-67020aaceb33"
+        },
+        {
+          "value": "/cmd_vel.linear.z",
+          "enabled": true,
+          "color": "#f7df71",
+          "id": "99c64a59-d88c-486f-8a9e-ec76bc0944b6"
+        }
+      ],
+      "showLegend": false,
+      "foxglovePanelTitle": "/cmd_vel"
+    },
+    "Plot!28cqx4t": {
+      "paths": [
+        {
+          "value": "/cmd_vel.angular.x",
+          "enabled": true,
+          "color": "#5cd6a9",
+          "id": "a5938950-1fb2-4486-b26f-592110015f94"
+        },
+        {
+          "value": "/cmd_vel.angular.y",
+          "enabled": true,
+          "color": "#61cbff",
+          "id": "26696096-c953-4ba4-a48f-8eac63225022"
+        },
+        {
+          "value": "/cmd_vel.angular.z",
+          "enabled": true,
+          "color": "#a395e2",
+          "id": "c47dbf38-9faa-4661-8eba-57a70ef86dc9"
+        }
+      ],
+      "showLegend": false,
+      "foxglovePanelTitle": "/cmd_vel"
+    },
+    "RawMessages!yfgb22": {
+      "topicPath": "/odom",
+      "expansion": {
+        "pose": "c"
+      },
+      "defaultExpanded": true
+    },
+    "Teleop!3ekfrl8": {
+      "topic": "/cmd_vel",
+      "publishRate": 1,
+      "autoSendStopOnRelease": false,
+      "upButton": {
+        "field": "linear-x",
+        "value": 1
+      },
+      "downButton": {
+        "field": "linear-x",
+        "value": -1
+      },
+      "leftButton": {
+        "field": "angular-z",
+        "value": 1
+      },
+      "rightButton": {
+        "field": "angular-z",
+        "value": -1
+      },
+      "stopButton": {
+        "field": "linear-x",
+        "value": 0
+      }
+    },
+    "Teleop!3imsu8s": {
+      "topic": "/cmd_vel_global",
+      "publishRate": 1,
+      "autoSendStopOnRelease": false,
+      "upButton": {
+        "field": "linear-y",
+        "value": 0.5
+      },
+      "downButton": {
+        "field": "linear-y",
+        "value": -0.5
+      },
+      "leftButton": {
+        "field": "linear-x",
+        "value": 0.5
+      },
+      "rightButton": {
+        "field": "linear-x",
+        "value": -0.5
+      },
+      "stopButton": {
+        "field": "linear-x",
+        "value": 0
+      }
+    },
+    "Tab!23ewzty": {
+      "activeTabIdx": 0,
+      "tabs": [
+        {
+          "title": "Overview",
+          "layout": {
+            "direction": "column",
+            "first": {
+              "direction": "row",
+              "first": "3D!3127koi",
+              "second": {
+                "direction": "column",
+                "first": "Plot!1n5jtc0",
+                "second": "Plot!28cqx4t",
+                "splitPercentage": 50
+              },
+              "splitPercentage": 60
+            },
+            "second": "RawMessages!yfgb22",
+            "splitPercentage": 72.62905162064826
+          }
+        },
+        {
+          "title": "LOCAL",
+          "layout": "Teleop!3ekfrl8"
+        },
+        {
+          "title": "GLOBAL",
+          "layout": "Teleop!3imsu8s"
+        }
+      ]
+    }
+  },
+  "layout": "Tab!23ewzty",
+  "globalVariables": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "userNodes": {}
+}

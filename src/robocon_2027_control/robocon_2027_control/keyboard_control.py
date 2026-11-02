@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """
 Custom keyboard teleop dengan 2 mode
-LOCAL -> Spti joystik/video game
+LOCAL -> Seperti joystik/video game
 GLOBAL -> Atau absolute, mengikuti axis x dan y yang tetap tanpa melihat arah robot
 
 M -> Ganti Mode
 Space -> Stop
+
+Input lain (dari Foxglove):
+/cmd_vel_global          -> Twist kecepatan dalam frame odom (world)
+/move_base_simple/goal   -> PoseStamped target posisi
 """
 
 import math
@@ -17,7 +21,7 @@ import time
 import tty
 
 import rclpy
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import PoseStamped, Twist
 from nav_msgs.msg import Odometry
 from rclpy.node import Node
 from rclpy.qos import DurabilityPolicy, QoSProfile
@@ -29,6 +33,9 @@ KEY_TIMEOUT = 0.3
 STEP_DISTANCE = 0.5
 CONTROL_HZ = 20.0
 DISTANCE_TOLERANCE = 0.02
+
+KP = 1.5  # gain proporsional, makin besar makin agresif
+MIN_SPEED = 0.05  # supaya tidak merayap di dekat target
 
 LOCAL_KEYS = {
     "w": (SPEED, 0.0),
@@ -58,11 +65,16 @@ class KeyboardControl(Node):
 
         latched = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL)
 
+        self.was_moving = False
         self.mode_pub = self.create_publisher(String, "/robot_mode", latched)
         self.cmd_pub = self.create_publisher(Twist, "/cmd_vel", 10)
         self.create_subscription(Odometry, "/odom", self.odom_callback, 10)
+        self.create_subscription(Twist, "/cmd_vel_global", self.global_cmd_callback, 10)
+        self.create_subscription(
+            PoseStamped, "/move_base_simple/goal", self.goal_callback, 10
+        )
 
-        self.mode = "Gkibak"
+        self.mode = "LOCAL"
 
         # ODOM pose
         self.x = 0.0
@@ -93,6 +105,12 @@ class KeyboardControl(Node):
     def publish_mode(self):
         self.mode_pub.publish(String(data=self.mode))
 
+    def set_mode(self, mode):
+        if mode != self.mode:
+            self.mode = mode
+            self.publish_mode()
+            self.get_logger().info(f"Mode changed to: {self.mode}")
+
     def read_key(self):
         latest = ""
         while select.select([self.fd], [], [], 0)[0]:
@@ -113,15 +131,37 @@ class KeyboardControl(Node):
         self.vel_yaw = 0.0
         self.target = None
 
+    def world_to_body(self, vx_world, vy_world):
+        """Putar kecepatan frame odom ke frame robot."""
+        cos_yaw, sin_yaw = math.cos(self.yaw), math.sin(self.yaw)
+        vx = vx_world * cos_yaw + vy_world * sin_yaw
+        vy = -vx_world * sin_yaw + vy_world * cos_yaw
+        return vx, vy
+
+    # Input dari Foxglove
+    def global_cmd_callback(self, msg):
+        """Kecepatan frame world dari Teleop panel (/cmd_vel_global)."""
+        self.set_mode("GLOBAL")
+        self.vel_x, self.vel_y = self.world_to_body(msg.linear.x, msg.linear.y)
+        self.vel_yaw = msg.angular.z
+        self.target = None
+        self.last_key_time = time.monotonic()
+
+    def goal_callback(self, msg):
+        """Target posisi dari klik di panel 3D Foxglove."""
+        self.set_mode("GLOBAL")
+        self.target = (msg.pose.position.x, msg.pose.position.y)
+        self.get_logger().info(
+            f"Goal ({msg.header.frame_id}): {self.target[0]:.2f}, {self.target[1]:.2f}"
+        )
+
     # Key Handling
     def handle_key(self, key, now):
         key = key.lower()
 
         if key == "m":
-            self.mode = "GLOBAL" if self.mode == "LOCAL" else "LOCAL"
             self.stop()
-            self.publish_mode()
-            self.get_logger().info(f"Mode changed to: {self.mode}")
+            self.set_mode("GLOBAL" if self.mode == "LOCAL" else "LOCAL")
         elif key == " ":
             self.stop()
         elif self.mode == "LOCAL" and key in LOCAL_KEYS:
@@ -132,11 +172,10 @@ class KeyboardControl(Node):
             dx, dy = GLOBAL_KEYS[key]
             self.target = (self.x + dx, self.y + dy)
 
-    
     #### PERGERAKAN
 
     def drive_to_target(self):
-        """Head toward self.target at constant speed, then stop on arrival."""
+        """Head toward self.target, slowing down as it gets close."""
         dx = self.target[0] - self.x
         dy = self.target[1] - self.y
         distance = math.hypot(dx, dy)
@@ -145,13 +184,12 @@ class KeyboardControl(Node):
             self.stop()
             return
 
-        # Desired velocity in the odom frame...
-        vx_world = SPEED * dx / distance
-        vy_world = SPEED * dy / distance
+        # Proportional control: pelan saat dekat, maksimal SPEED
+        speed = max(MIN_SPEED, min(SPEED, KP * distance))
+        vx_world = speed * dx / distance
+        vy_world = speed * dy / distance
 
-        cos_yaw, sin_yaw = math.cos(self.yaw), math.sin(self.yaw)
-        self.vel_x = vx_world * cos_yaw + vy_world * sin_yaw
-        self.vel_y = -vx_world * sin_yaw + vy_world * cos_yaw
+        self.vel_x, self.vel_y = self.world_to_body(vx_world, vy_world)
         self.vel_yaw = 0.0
 
     def control_loop(self):
@@ -161,15 +199,19 @@ class KeyboardControl(Node):
         if key:
             self.handle_key(key, now)
 
-        if self.mode == "LOCAL":
-            if now - self.last_key_time > KEY_TIMEOUT:
-                self.stop()
-        elif self.target is not None:
+        if self.target is not None:
             self.drive_to_target()
+        elif now - self.last_key_time > KEY_TIMEOUT:
+            self.stop()
 
         self.publish_velocity()
 
     def publish_velocity(self):
+        moving = any((self.vel_x, self.vel_y, self.vel_yaw))
+        if not moving and not self.was_moving:
+            return  # idle: stay quiet so other publishers can drive
+        self.was_moving = moving
+
         cmd = Twist()
         cmd.linear.x = self.vel_x
         cmd.linear.y = self.vel_y

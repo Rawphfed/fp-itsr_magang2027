@@ -17,11 +17,14 @@ SPEED = 0.5
 ANGULAR_SPEED = 1.0  # Turn speed for autonomous orientation
 KEY_TIMEOUT = 0.3
 STEP_DISTANCE = 0.5  # Distance to move in meters per keypress in GLOBAL mode
-STEP_ANGLE = math.pi / 4  # Angle to rotate in radians (45 degrees) per keypress in GLOBAL mode
+STEP_ANGLE = (
+    math.pi / 4
+)  # Angle to rotate in radians (45 degrees) per keypress in GLOBAL mode
 
 
 class KeyboardControl(Node):
     def __init__(self):
+        self.was_idle = False
         super().__init__("keyboard_control")
 
         # Mode of the movement
@@ -59,7 +62,7 @@ class KeyboardControl(Node):
         self.cmd = Twist()
 
         self.publish_mode()
-        
+
         # Changed timer from 1.0 to 0.05 (20Hz) for responsive control loop execution
         self.timer = self.create_timer(0.05, self.control_loop)
 
@@ -139,12 +142,20 @@ class KeyboardControl(Node):
 
             match key.lower():
                 case "w":  # Absolute forward along current heading
-                    self.target_x = self.current_x + STEP_DISTANCE * math.cos(self.current_yaw)
-                    self.target_y = self.current_y + STEP_DISTANCE * math.sin(self.current_yaw)
+                    self.target_x = self.current_x + STEP_DISTANCE * math.cos(
+                        self.current_yaw
+                    )
+                    self.target_y = self.current_y + STEP_DISTANCE * math.sin(
+                        self.current_yaw
+                    )
                     self.global_move_type = "linear"
                 case "s":  # Absolute backward along current heading
-                    self.target_x = self.current_x - STEP_DISTANCE * math.cos(self.current_yaw)
-                    self.target_y = self.current_y - STEP_DISTANCE * math.sin(self.current_yaw)
+                    self.target_x = self.current_x - STEP_DISTANCE * math.cos(
+                        self.current_yaw
+                    )
+                    self.target_y = self.current_y - STEP_DISTANCE * math.sin(
+                        self.current_yaw
+                    )
                     self.global_move_type = "linear"
                 case "a":  # Turn 45 degrees left absolute
                     self.target_yaw = self.current_yaw + STEP_ANGLE
@@ -174,18 +185,26 @@ class KeyboardControl(Node):
         elif self.mode == "GLOBAL" and self.global_target_active:
             if self.global_move_type == "linear":
                 # Compute distance error remaining to coordinate goal
-                distance_err = math.sqrt((self.target_x - self.current_x) ** 2 + (self.target_y - self.current_y) ** 2)
-                
+                distance_err = math.sqrt(
+                    (self.target_x - self.current_x) ** 2
+                    + (self.target_y - self.current_y) ** 2
+                )
+
                 if distance_err > 0.02:  # 2 cm tolerance
                     # Determine whether we are tracking a forward step or reverse step
                     # Look ahead angle error to detect if target is behind us
-                    heading_to_target = math.atan2(self.target_y - self.current_y, self.target_x - self.current_x)
-                    angle_diff = math.atan2(math.sin(heading_to_target - self.current_yaw), math.cos(heading_to_target - self.current_yaw))
-                    
+                    heading_to_target = math.atan2(
+                        self.target_y - self.current_y, self.target_x - self.current_x
+                    )
+                    angle_diff = math.atan2(
+                        math.sin(heading_to_target - self.current_yaw),
+                        math.cos(heading_to_target - self.current_yaw),
+                    )
+
                     if abs(angle_diff) > math.pi / 2:
                         self.linear_x = -SPEED  # Moving backward
                     else:
-                        self.linear_x = SPEED   # Moving forward
+                        self.linear_x = SPEED  # Moving forward
                     self.angular_z = 0.0
                 else:
                     self.stop_motion()
@@ -193,8 +212,11 @@ class KeyboardControl(Node):
 
             elif self.global_move_type == "angular":
                 # Compute absolute angular shift error remaining, normalized between [-pi, pi]
-                angle_err = math.atan2(math.sin(self.target_yaw - self.current_yaw), math.cos(self.target_yaw - self.current_yaw))
-                
+                angle_err = math.atan2(
+                    math.sin(self.target_yaw - self.current_yaw),
+                    math.cos(self.target_yaw - self.current_yaw),
+                )
+
                 if abs(angle_err) > 0.03:  # ~1.7 degrees tolerance
                     self.linear_x = 0.0
                     self.angular_z = ANGULAR_SPEED if angle_err > 0 else -ANGULAR_SPEED
