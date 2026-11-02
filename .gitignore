@@ -1,0 +1,12 @@
+cat > .gitignore << 'EOF'
+build/
+install/
+log/
+.venv/
+.vscode/browse.vc.db*
+.vscode/ipch/
+__pycache__/
+*.pyc
+EOF
+git add .gitignore
+git commit -m "Add .gitignore"
