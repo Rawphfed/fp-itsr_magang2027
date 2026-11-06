@@ -1,16 +1,4 @@
 #!/usr/bin/env python3
-"""
-Custom keyboard teleop dengan 2 mode
-LOCAL -> Seperti joystik/video game
-GLOBAL -> Atau absolute, mengikuti axis x dan y yang tetap tanpa melihat arah robot
-
-M -> Ganti Mode
-Space -> Stop
-
-Input lain (dari Foxglove):
-/cmd_vel_global          -> Twist kecepatan dalam frame odom (world)
-/move_base_simple/goal   -> PoseStamped target posisi
-"""
 
 import math
 import os
@@ -27,16 +15,89 @@ from rclpy.node import Node
 from rclpy.qos import DurabilityPolicy, QoSProfile
 from std_msgs.msg import String
 
-# Units pakai m, s, rad, dan SI lainnya
-SPEED = 0.5
+
+# ==========================================
+# PID CONTROLLER CLASS
+# ==========================================
+def wrap_angle(angle):
+    """Wraps angle between -pi and pi."""
+    return math.atan2(math.sin(angle), math.cos(angle))
+
+
+def clamp(value, limit):
+    """Clamps value within [-limit, limit]."""
+    return max(-limit, min(limit, value))
+
+
+class PID:
+    def __init__(self, kp, ki=0.0, kd=0.0, o_lim=math.inf, i_lim=math.inf, wrap=False):
+        self.kp = kp
+        self.ki = ki
+        self.kd = kd
+        self.o_lim = abs(o_lim)
+        self.i_lim = abs(i_lim)
+        self.wrap = wrap
+        self.reset()
+
+    def reset(self):
+        self.i_term = 0.0
+        self.prev_measurement = None
+
+    def _diff(self, a, b):
+        diff = a - b
+        return wrap_angle(diff) if self.wrap else diff
+
+    def update(self, setpoint, measurement, dt):
+        error = self._diff(setpoint, measurement)
+        valid_dt = dt > 0.0
+
+        p_term = self.kp * error
+
+        d_term = 0.0
+        if valid_dt and self.prev_measurement is not None:
+            rate = self._diff(measurement, self.prev_measurement) / dt
+            d_term = -self.kd * rate
+        self.prev_measurement = measurement
+
+        new_i = self.i_term
+        if valid_dt:
+            new_i = clamp(self.i_term + self.ki * error * dt, self.i_lim)
+
+        raw = p_term + new_i + d_term
+
+        pushing_into_saturation = abs(raw) > self.o_lim and error * raw > 0.0
+        if not pushing_into_saturation:
+            self.i_term = new_i
+
+        output = p_term + self.i_term + d_term
+        return clamp(output, self.o_lim)
+
+
+# ==========================================
+# CONFIGURATION & CONSTANTS
+# ==========================================
+SPEED = 1.0
+ANGULAR_SPEED = 0.6
+DIST_TOL = 0.02
+YAW_TOL = 0.05
 KEY_TIMEOUT = 0.3
-STEP_DISTANCE = 0.5
 CONTROL_HZ = 20.0
-DISTANCE_TOLERANCE = 0.02
 
-KP = 1.5  # gain proporsional, makin besar makin agresif
-MIN_SPEED = 0.05  # supaya tidak merayap di dekat target
+GOAL_SPEED = 0.8
+GOAL_YAW_SPEED = 0.8
 
+# PID Gains
+KP_XY = 5.0
+KI_XY = 0.1
+KD_XY = 0.1
+I_LIMIT_XY = 0.2
+
+YAW_KP = 1.0
+YAW_KI = 0.05
+YAW_KD = 0.0
+YAW_I_LIMIT = 0.2
+
+# Keymaps
 LOCAL_KEYS = {
     "w": (SPEED, 0.0),
     "s": (-SPEED, 0.0),
@@ -45,52 +106,72 @@ LOCAL_KEYS = {
 }
 
 GLOBAL_KEYS = {
-    "w": (0.0, STEP_DISTANCE),
-    "s": (0.0, -STEP_DISTANCE),
-    "a": (-STEP_DISTANCE, 0.0),
-    "d": (STEP_DISTANCE, 0.0),
+    "w": (0.0, SPEED, 0.0),
+    "s": (0.0, -SPEED, 0.0),
+    "a": (-SPEED, 0.0, 0.0),
+    "d": (SPEED, 0.0, 0.0),
+    "q": (0.0, 0.0, ANGULAR_SPEED),
+    "e": (0.0, 0.0, -ANGULAR_SPEED),
 }
 
 
-def quaternion_converter(q):
-    # Reference: https://tom-howard.github.io/ros2/course/part2/#pose
+def quaternion_to_yaw(q):
     siny_cosp = 2 * (q.w * q.z + q.x * q.y)
     cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z)
     return math.atan2(siny_cosp, cosy_cosp)
 
 
-class KeyboardControl(Node):
+# ==========================================
+# MAIN TR CONTROL NODE
+# ==========================================
+class KeyboardController(Node):
     def __init__(self):
-        super().__init__("keyboard_control")
+        super().__init__("keyboard_controller")
 
-        latched = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL)
+        latched_qos = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL)
 
-        self.was_moving = False
-        self.mode_pub = self.create_publisher(String, "/robot_mode", latched)
+        # Publishers (Compatible with WebUI / Foxglove Studio)
         self.cmd_pub = self.create_publisher(Twist, "/cmd_vel", 10)
+        self.mode_pub = self.create_publisher(String, "/robot_mode", latched_qos)
+
+        # Subscriptions
         self.create_subscription(Odometry, "/odom", self.odom_callback, 10)
         self.create_subscription(Twist, "/cmd_vel_global", self.global_cmd_callback, 10)
-        self.create_subscription(
-            PoseStamped, "/move_base_simple/goal", self.goal_callback, 10
-        )
+        self.create_subscription(PoseStamped, "/goal_pose", self.goal_callback, 10)
 
         self.mode = "LOCAL"
+        self.was_moving = False
 
-        # ODOM pose
+        # Semi-Autonomous PID Controllers
+        self.pid_x = PID(KP_XY, KI_XY, KD_XY, o_lim=GOAL_SPEED, i_lim=I_LIMIT_XY)
+        self.pid_y = PID(KP_XY, KI_XY, KD_XY, o_lim=GOAL_SPEED, i_lim=I_LIMIT_XY)
+        self.pid_yaw = PID(
+            YAW_KP,
+            YAW_KI,
+            YAW_KD,
+            o_lim=GOAL_YAW_SPEED,
+            i_lim=YAW_I_LIMIT,
+            wrap=True,
+        )
+
+        # State Variables
         self.x = 0.0
         self.y = 0.0
         self.yaw = 0.0
 
-        # ODOM target GLOBAL mode
-        self.target = None
+        self.target = None  # (x, y, yaw)
+        self.global_vel_x = 0.0
+        self.global_vel_y = 0.0
+        self.global_vel_yaw = 0.0
 
-        # Velocity
         self.vel_x = 0.0
         self.vel_y = 0.0
         self.vel_yaw = 0.0
+
+        self.last_loop_time = time.monotonic()
         self.last_key_time = time.monotonic()
 
-        # Terminal input
+        # Custom Low-level Terminal Key Reader (Criteria b)
         self.fd = sys.stdin.fileno()
         self.old_term_settings = termios.tcgetattr(self.fd)
         tty.setcbreak(self.fd)
@@ -99,7 +180,12 @@ class KeyboardControl(Node):
         self.create_timer(1.0 / CONTROL_HZ, self.control_loop)
 
         self.get_logger().info(
-            "W: forward | S: backward | A: left | D: right | SPACE: stop | M: toggle mode"
+            "TR Controller Active!\n"
+            "   - WASD: Directional movement\n"
+            "   - Q/E: Rotation (Global mode)\n"
+            "   - M: Toggle GLOBAL / LOCAL mode\n"
+            "   - SPACE: Emergency stop\n"
+            "   - P: Print current pose\n"
         )
 
     def publish_mode(self):
@@ -123,93 +209,126 @@ class KeyboardControl(Node):
     def odom_callback(self, msg):
         self.x = msg.pose.pose.position.x
         self.y = msg.pose.pose.position.y
-        self.yaw = quaternion_converter(msg.pose.pose.orientation)
+        self.yaw = quaternion_to_yaw(msg.pose.pose.orientation)
 
     def stop(self):
         self.vel_x = 0.0
         self.vel_y = 0.0
         self.vel_yaw = 0.0
+        self.global_vel_x = 0.0
+        self.global_vel_y = 0.0
+        self.global_vel_yaw = 0.0
         self.target = None
+        self.pid_x.reset()
+        self.pid_y.reset()
+        self.pid_yaw.reset()
 
     def world_to_body(self, vx_world, vy_world):
-        """Putar kecepatan frame odom ke frame robot."""
         cos_yaw, sin_yaw = math.cos(self.yaw), math.sin(self.yaw)
         vx = vx_world * cos_yaw + vy_world * sin_yaw
         vy = -vx_world * sin_yaw + vy_world * cos_yaw
         return vx, vy
 
-    # Input dari Foxglove
     def global_cmd_callback(self, msg):
-        """Kecepatan frame world dari Teleop panel (/cmd_vel_global)."""
+        """Allows direct teleoperation in global coordinates via WebUI/Foxglove."""
         self.set_mode("GLOBAL")
-        self.vel_x, self.vel_y = self.world_to_body(msg.linear.x, msg.linear.y)
-        self.vel_yaw = msg.angular.z
+        self.global_vel_x = msg.linear.x
+        self.global_vel_y = msg.linear.y
+        self.global_vel_yaw = msg.angular.z
         self.target = None
         self.last_key_time = time.monotonic()
 
     def goal_callback(self, msg):
-        """Target posisi dari klik di panel 3D Foxglove."""
+        """Processes semi-autonomous position target (Criteria e)."""
         self.set_mode("GLOBAL")
-        self.target = (msg.pose.position.x, msg.pose.position.y)
-        self.get_logger().info(
-            f"Goal ({msg.header.frame_id}): {self.target[0]:.2f}, {self.target[1]:.2f}"
-        )
+        self.pid_x.reset()
+        self.pid_y.reset()
+        self.pid_yaw.reset()
 
-    # Key Handling
+        self.target = (
+            msg.pose.position.x,
+            msg.pose.position.y,
+            quaternion_to_yaw(msg.pose.orientation),
+        )
+        self.last_key_time = time.monotonic()
+        self.get_logger().info(f"New Target Received: {self.target}")
+
     def handle_key(self, key, now):
         key = key.lower()
 
         if key == "m":
             self.stop()
             self.set_mode("GLOBAL" if self.mode == "LOCAL" else "LOCAL")
+
         elif key == " ":
             self.stop()
+
+        elif key == "p":
+            self.get_logger().info(
+                f"Position -> X: {self.x:.3f}, Y: {self.y:.3f}, Yaw: {self.yaw:.3f}"
+            )
+
         elif self.mode == "LOCAL" and key in LOCAL_KEYS:
             self.vel_x, self.vel_yaw = LOCAL_KEYS[key]
+            self.vel_y = 0.0
             self.last_key_time = now
-        elif self.mode == "GLOBAL" and key in GLOBAL_KEYS and self.target is None:
-            # Ignore new steps until the current one finishes.
-            dx, dy = GLOBAL_KEYS[key]
-            self.target = (self.x + dx, self.y + dy)
 
-    #### PERGERAKAN
+        elif self.mode == "GLOBAL" and key in GLOBAL_KEYS:
+            self.target = None
+            (
+                self.global_vel_x,
+                self.global_vel_y,
+                self.global_vel_yaw,
+            ) = GLOBAL_KEYS[key]
+            self.last_key_time = now
 
-    def drive_to_target(self):
-        """Head toward self.target, slowing down as it gets close."""
+    def drive_to_target(self, dt):
+        """Semi-autonomous PID control targeting drive (Criteria e)."""
         dx = self.target[0] - self.x
         dy = self.target[1] - self.y
-        distance = math.hypot(dx, dy)
+        yaw_error = wrap_angle(self.target[2] - self.yaw)
 
-        if distance <= DISTANCE_TOLERANCE:
+        if math.hypot(dx, dy) <= DIST_TOL and abs(yaw_error) <= YAW_TOL:
+            self.get_logger().info("Target reached!")
             self.stop()
             return
 
-        # Proportional control: pelan saat dekat, maksimal SPEED
-        speed = max(MIN_SPEED, min(SPEED, KP * distance))
-        vx_world = speed * dx / distance
-        vy_world = speed * dy / distance
+        vx_world = self.pid_x.update(self.target[0], self.x, dt)
+        vy_world = self.pid_y.update(self.target[1], self.y, dt)
+
+        speed = math.hypot(vx_world, vy_world)
+        if speed > SPEED:
+            vx_world *= SPEED / speed
+            vy_world *= SPEED / speed
 
         self.vel_x, self.vel_y = self.world_to_body(vx_world, vy_world)
-        self.vel_yaw = 0.0
+        self.vel_yaw = self.pid_yaw.update(self.target[2], self.yaw, dt)
 
     def control_loop(self):
         now = time.monotonic()
-
+        dt = now - self.last_loop_time
+        self.last_loop_time = now
         key = self.read_key()
+
         if key:
             self.handle_key(key, now)
-
-        if self.target is not None:
-            self.drive_to_target()
+        elif self.target is not None:
+            self.drive_to_target(dt)
         elif now - self.last_key_time > KEY_TIMEOUT:
             self.stop()
+        elif self.mode == "GLOBAL":
+            self.vel_x, self.vel_y = self.world_to_body(
+                self.global_vel_x, self.global_vel_y
+            )
+            self.vel_yaw = self.global_vel_yaw
 
         self.publish_velocity()
 
     def publish_velocity(self):
         moving = any((self.vel_x, self.vel_y, self.vel_yaw))
+
         if not moving and not self.was_moving:
-            return  # idle: stay quiet so other publishers can drive
+            return
         self.was_moving = moving
 
         cmd = Twist()
@@ -217,8 +336,6 @@ class KeyboardControl(Node):
         cmd.linear.y = self.vel_y
         cmd.angular.z = self.vel_yaw
         self.cmd_pub.publish(cmd)
-
-    #### BERSIH2 AKHIR
 
     def close(self):
         termios.tcsetattr(self.fd, termios.TCSADRAIN, self.old_term_settings)
@@ -231,7 +348,7 @@ def main(args=None):
     node = None
 
     try:
-        node = KeyboardControl()
+        node = KeyboardController()
         rclpy.spin(node)
     except KeyboardInterrupt:
         pass

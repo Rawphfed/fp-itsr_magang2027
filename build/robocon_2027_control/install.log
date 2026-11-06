@@ -1,9 +1,13 @@
 /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/keyboard_control.py
+/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/keyboard_control.backup.py
+/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/obj_detector.py
 /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/__init__.py
-/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/odom_movement.py
+/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/pid.py
 /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/__pycache__/keyboard_control.cpython-310.pyc
+/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/__pycache__/keyboard_control.backup.cpython-310.pyc
+/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/__pycache__/obj_detector.cpython-310.pyc
 /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/__pycache__/__init__.cpython-310.pyc
-/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/__pycache__/odom_movement.cpython-310.pyc
+/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control/__pycache__/pid.cpython-310.pyc
 /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/share/ament_index/resource_index/packages/robocon_2027_control
 /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/share/robocon_2027_control/package.xml
 /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control-0.0.0-py3.10.egg-info/zip-safe
@@ -14,3 +18,4 @@
 /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control-0.0.0-py3.10.egg-info/requires.txt
 /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/python3.10/site-packages/robocon_2027_control-0.0.0-py3.10.egg-info/entry_points.txt
 /home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/robocon_2027_control/keyboard_control
+/home/rawfed/Programming/simulasi-2027_ws/install/robocon_2027_control/lib/robocon_2027_control/obj_detector

@@ -24,6 +24,7 @@ setup(
     entry_points={
         "console_scripts": [
             "keyboard_control = robocon_2027_control.keyboard_control:main",
+            "obj_detector = robocon_2027_control.obj_detector:main",
         ],
     },
 )

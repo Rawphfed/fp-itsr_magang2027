@@ -1,0 +1,931 @@
+[01;34m.[0m
+├── [01;34mbuild[0m
+│   ├── COLCON_IGNORE
+│   ├── [01;34mrobocon_2027_control[0m
+│   │   ├── [01;34mbuild[0m
+│   │   │   └── [01;34mlib[0m
+│   │   │       └── [01;34mrobocon_2027_control[0m
+│   │   │           ├── __init__.py
+│   │   │           ├── keyboard_control.backup.py
+│   │   │           ├── keyboard_control.py
+│   │   │           ├── odom_movement.py
+│   │   │           └── pid.py
+│   │   ├── colcon_build.rc
+│   │   ├── colcon_command_prefix_setup_py.sh
+│   │   ├── colcon_command_prefix_setup_py.sh.env
+│   │   ├── install.log
+│   │   ├── [01;34mprefix_override[0m
+│   │   │   ├── [01;34m__pycache__[0m
+│   │   │   │   └── sitecustomize.cpython-310.pyc
+│   │   │   └── sitecustomize.py
+│   │   └── [01;34mrobocon_2027_control.egg-info[0m
+│   │       ├── dependency_links.txt
+│   │       ├── entry_points.txt
+│   │       ├── PKG-INFO
+│   │       ├── requires.txt
+│   │       ├── SOURCES.txt
+│   │       ├── top_level.txt
+│   │       └── zip-safe
+│   ├── [01;34mrobocon_2027_description[0m
+│   │   ├── [01;34mament_cmake_core[0m
+│   │   │   ├── package.cmake
+│   │   │   ├── robocon_2027_descriptionConfig.cmake
+│   │   │   ├── robocon_2027_descriptionConfig-version.cmake
+│   │   │   └── [01;34mstamps[0m
+│   │   │       ├── ament_prefix_path.sh.stamp
+│   │   │       ├── nameConfig.cmake.in.stamp
+│   │   │       ├── nameConfig-version.cmake.in.stamp
+│   │   │       ├── package_xml_2_cmake.py.stamp
+│   │   │       ├── package.xml.stamp
+│   │   │       ├── path.sh.stamp
+│   │   │       └── templates_2_cmake.py.stamp
+│   │   ├── [01;34mament_cmake_environment_hooks[0m
+│   │   │   ├── ament_prefix_path.dsv
+│   │   │   ├── local_setup.bash
+│   │   │   ├── local_setup.dsv
+│   │   │   ├── local_setup.sh
+│   │   │   ├── local_setup.zsh
+│   │   │   ├── package.dsv
+│   │   │   └── path.dsv
+│   │   ├── [01;34mament_cmake_index[0m
+│   │   │   └── [01;34mshare[0m
+│   │   │       └── [01;34mament_index[0m
+│   │   │           └── [01;34mresource_index[0m
+│   │   │               ├── [01;34mpackage_run_dependencies[0m
+│   │   │               │   └── robocon_2027_description
+│   │   │               ├── [01;34mpackages[0m
+│   │   │               │   └── robocon_2027_description
+│   │   │               └── [01;34mparent_prefix_path[0m
+│   │   │                   └── robocon_2027_description
+│   │   ├── [01;34mament_cmake_package_templates[0m
+│   │   │   └── templates.cmake
+│   │   ├── [01;34mament_cmake_uninstall_target[0m
+│   │   │   └── ament_cmake_uninstall_target.cmake
+│   │   ├── [01;34mament_flake8[0m
+│   │   ├── [01;34mament_lint_cmake[0m
+│   │   ├── [01;34mament_pep257[0m
+│   │   ├── [01;34mament_xmllint[0m
+│   │   ├── cmake_args.last
+│   │   ├── CMakeCache.txt
+│   │   ├── [01;34mCMakeFiles[0m
+│   │   │   ├── [01;34m3.22.1[0m
+│   │   │   │   ├── CMakeCCompiler.cmake
+│   │   │   │   ├── CMakeCXXCompiler.cmake
+│   │   │   │   ├── [01;32mCMakeDetermineCompilerABI_C.bin[0m
+│   │   │   │   ├── [01;32mCMakeDetermineCompilerABI_CXX.bin[0m
+│   │   │   │   ├── CMakeSystem.cmake
+│   │   │   │   ├── [01;34mCompilerIdC[0m
+│   │   │   │   │   ├── [01;32ma.out[0m
+│   │   │   │   │   ├── CMakeCCompilerId.c
+│   │   │   │   │   └── [01;34mtmp[0m
+│   │   │   │   └── [01;34mCompilerIdCXX[0m
+│   │   │   │       ├── [01;32ma.out[0m
+│   │   │   │       ├── CMakeCXXCompilerId.cpp
+│   │   │   │       └── [01;34mtmp[0m
+│   │   │   ├── cmake.check_cache
+│   │   │   ├── CMakeDirectoryInformation.cmake
+│   │   │   ├── CMakeOutput.log
+│   │   │   ├── CMakeRuleHashes.txt
+│   │   │   ├── [01;34mCMakeTmp[0m
+│   │   │   ├── Makefile2
+│   │   │   ├── Makefile.cmake
+│   │   │   ├── progress.marks
+│   │   │   ├── [01;34mrobocon_2027_description_uninstall.dir[0m
+│   │   │   │   ├── build.make
+│   │   │   │   ├── cmake_clean.cmake
+│   │   │   │   ├── compiler_depend.make
+│   │   │   │   ├── compiler_depend.ts
+│   │   │   │   ├── DependInfo.cmake
+│   │   │   │   └── progress.make
+│   │   │   ├── TargetDirectories.txt
+│   │   │   └── [01;34muninstall.dir[0m
+│   │   │       ├── build.make
+│   │   │       ├── cmake_clean.cmake
+│   │   │       ├── compiler_depend.make
+│   │   │       ├── compiler_depend.ts
+│   │   │       ├── DependInfo.cmake
+│   │   │       └── progress.make
+│   │   ├── cmake_install.cmake
+│   │   ├── colcon_build.rc
+│   │   ├── colcon_command_prefix_build.sh
+│   │   ├── colcon_command_prefix_build.sh.env
+│   │   ├── CTestConfiguration.ini
+│   │   ├── CTestCustom.cmake
+│   │   ├── CTestTestfile.cmake
+│   │   ├── install_manifest.txt
+│   │   └── Makefile
+│   └── [01;34mrobocon_2027_webots[0m
+│       ├── [01;34mbuild[0m
+│       │   └── [01;34mlib[0m
+│       │       └── [01;34mrobocon_2027_webots[0m
+│       │           ├── __init__.py
+│       │           └── tr_webots_driver.py
+│       ├── colcon_build.rc
+│       ├── colcon_command_prefix_setup_py.sh
+│       ├── colcon_command_prefix_setup_py.sh.env
+│       ├── install.log
+│       ├── [01;34mprefix_override[0m
+│       │   ├── [01;34m__pycache__[0m
+│       │   │   └── sitecustomize.cpython-310.pyc
+│       │   └── sitecustomize.py
+│       └── [01;34mrobocon_2027_webots.egg-info[0m
+│           ├── dependency_links.txt
+│           ├── entry_points.txt
+│           ├── PKG-INFO
+│           ├── requires.txt
+│           ├── SOURCES.txt
+│           ├── top_level.txt
+│           └── zip-safe
+├── Default for ws___localhost_8765_.json
+├── frames_2026-11-04_19.59.09.gv
+├── frames_2026-11-04_19.59.09.pdf
+├── [01;34minstall[0m
+│   ├── COLCON_IGNORE
+│   ├── local_setup.bash
+│   ├── local_setup.ps1
+│   ├── local_setup.sh
+│   ├── _local_setup_util_ps1.py
+│   ├── _local_setup_util_sh.py
+│   ├── local_setup.zsh
+│   ├── [01;34mrobocon_2027_control[0m
+│   │   ├── [01;34mlib[0m
+│   │   │   ├── [01;34mpython3.10[0m
+│   │   │   │   └── [01;34msite-packages[0m
+│   │   │   │       ├── [01;34mrobocon_2027_control[0m
+│   │   │   │       │   ├── __init__.py
+│   │   │   │       │   ├── keyboard_control.backup.py
+│   │   │   │       │   ├── keyboard_control.py
+│   │   │   │       │   ├── odom_movement.py
+│   │   │   │       │   ├── pid.py
+│   │   │   │       │   └── [01;34m__pycache__[0m
+│   │   │   │       │       ├── __init__.cpython-310.pyc
+│   │   │   │       │       ├── keyboard_control.backup.cpython-310.pyc
+│   │   │   │       │       ├── keyboard_control.cpython-310.pyc
+│   │   │   │       │       ├── odom_movement.cpython-310.pyc
+│   │   │   │       │       └── pid.cpython-310.pyc
+│   │   │   │       └── [01;34mrobocon_2027_control-0.0.0-py3.10.egg-info[0m
+│   │   │   │           ├── dependency_links.txt
+│   │   │   │           ├── entry_points.txt
+│   │   │   │           ├── PKG-INFO
+│   │   │   │           ├── requires.txt
+│   │   │   │           ├── SOURCES.txt
+│   │   │   │           ├── top_level.txt
+│   │   │   │           └── zip-safe
+│   │   │   └── [01;34mrobocon_2027_control[0m
+│   │   │       ├── [01;32mkeyboard_control[0m
+│   │   │       └── [01;32mkeyboard_node[0m
+│   │   └── [01;34mshare[0m
+│   │       ├── [01;34mament_index[0m
+│   │       │   └── [01;34mresource_index[0m
+│   │       │       └── [01;34mpackages[0m
+│   │       │           └── robocon_2027_control
+│   │       ├── [01;34mcolcon-core[0m
+│   │       │   └── [01;34mpackages[0m
+│   │       │       └── robocon_2027_control
+│   │       └── [01;34mrobocon_2027_control[0m
+│   │           ├── [01;34mhook[0m
+│   │           │   ├── ament_prefix_path.dsv
+│   │           │   ├── ament_prefix_path.ps1
+│   │           │   ├── ament_prefix_path.sh
+│   │           │   ├── pythonpath.dsv
+│   │           │   ├── pythonpath.ps1
+│   │           │   └── pythonpath.sh
+│   │           ├── package.bash
+│   │           ├── package.dsv
+│   │           ├── package.ps1
+│   │           ├── package.sh
+│   │           ├── package.xml
+│   │           └── package.zsh
+│   ├── [01;34mrobocon_2027_description[0m
+│   │   └── [01;34mshare[0m
+│   │       ├── [01;34mament_index[0m
+│   │       │   └── [01;34mresource_index[0m
+│   │       │       ├── [01;34mpackage_run_dependencies[0m
+│   │       │       │   └── robocon_2027_description
+│   │       │       ├── [01;34mpackages[0m
+│   │       │       │   └── robocon_2027_description
+│   │       │       └── [01;34mparent_prefix_path[0m
+│   │       │           └── robocon_2027_description
+│   │       ├── [01;34mcolcon-core[0m
+│   │       │   └── [01;34mpackages[0m
+│   │       │       └── robocon_2027_description
+│   │       └── [01;34mrobocon_2027_description[0m
+│   │           ├── [01;34mcmake[0m
+│   │           │   ├── robocon_2027_descriptionConfig.cmake
+│   │           │   └── robocon_2027_descriptionConfig-version.cmake
+│   │           ├── [01;34menvironment[0m
+│   │           │   ├── ament_prefix_path.dsv
+│   │           │   ├── ament_prefix_path.sh
+│   │           │   ├── path.dsv
+│   │           │   └── path.sh
+│   │           ├── [01;34mhook[0m
+│   │           │   ├── cmake_prefix_path.dsv
+│   │           │   ├── cmake_prefix_path.ps1
+│   │           │   └── cmake_prefix_path.sh
+│   │           ├── [01;34mlaunch[0m
+│   │           │   └── display.launch.py
+│   │           ├── local_setup.bash
+│   │           ├── local_setup.dsv
+│   │           ├── local_setup.sh
+│   │           ├── local_setup.zsh
+│   │           ├── package.bash
+│   │           ├── package.dsv
+│   │           ├── package.ps1
+│   │           ├── package.sh
+│   │           ├── package.xml
+│   │           ├── package.zsh
+│   │           ├── [01;34mrviz[0m
+│   │           │   ├── tr_robot.rviz
+│   │           │   └── tr_robot_sim.rviz
+│   │           └── [01;34murdf[0m
+│   │               └── tr.urdf.xacro
+│   ├── [01;34mrobocon_2027_webots[0m
+│   │   ├── [01;34mlib[0m
+│   │   │   ├── [01;34mpython3.10[0m
+│   │   │   │   └── [01;34msite-packages[0m
+│   │   │   │       ├── [01;34mrobocon_2027_webots[0m
+│   │   │   │       │   ├── __init__.py
+│   │   │   │       │   ├── [01;34m__pycache__[0m
+│   │   │   │       │   │   ├── __init__.cpython-310.pyc
+│   │   │   │       │   │   └── tr_webots_driver.cpython-310.pyc
+│   │   │   │       │   └── tr_webots_driver.py
+│   │   │   │       └── [01;34mrobocon_2027_webots-0.0.0-py3.10.egg-info[0m
+│   │   │   │           ├── dependency_links.txt
+│   │   │   │           ├── entry_points.txt
+│   │   │   │           ├── PKG-INFO
+│   │   │   │           ├── requires.txt
+│   │   │   │           ├── SOURCES.txt
+│   │   │   │           ├── top_level.txt
+│   │   │   │           └── zip-safe
+│   │   │   └── [01;34mrobocon_2027_webots[0m
+│   │   │       └── [01;32mtr_webots_driver[0m
+│   │   └── [01;34mshare[0m
+│   │       ├── [01;34mament_index[0m
+│   │       │   └── [01;34mresource_index[0m
+│   │       │       └── [01;34mpackages[0m
+│   │       │           └── robocon_2027_webots
+│   │       ├── [01;34mcolcon-core[0m
+│   │       │   └── [01;34mpackages[0m
+│   │       │       └── robocon_2027_webots
+│   │       └── [01;34mrobocon_2027_webots[0m
+│   │           ├── [01;34mhook[0m
+│   │           │   ├── ament_prefix_path.dsv
+│   │           │   ├── ament_prefix_path.ps1
+│   │           │   ├── ament_prefix_path.sh
+│   │           │   ├── pythonpath.dsv
+│   │           │   ├── pythonpath.ps1
+│   │           │   └── pythonpath.sh
+│   │           ├── [01;34mlaunch[0m
+│   │           │   ├── [01;34m__pycache__[0m
+│   │           │   │   └── simulation.launch.cpython-310.pyc
+│   │           │   └── simulation.launch.py
+│   │           ├── package.bash
+│   │           ├── package.dsv
+│   │           ├── package.ps1
+│   │           ├── package.sh
+│   │           ├── package.xml
+│   │           ├── package.zsh
+│   │           ├── [01;34mprotos[0m
+│   │           │   ├── Belajar_TRRobot.proto
+│   │           │   ├── EarthBlock.proto
+│   │           │   ├── Mustika.proto
+│   │           │   ├── SkyBlock.proto
+│   │           │   └── TRRobot.proto
+│   │           ├── [01;34murdf[0m
+│   │           │   ├── br_webots.urdf
+│   │           │   └── tr_webots.urdf
+│   │           └── [01;34mworlds[0m
+│   │               ├── simple_arena.wbt
+│   │               └── [01;34mtextures[0m
+│   │                   ├── [01;35mground.png[0m
+│   │                   ├── [01;35mlevel1_biru(1).png[0m
+│   │                   ├── [01;35mlevel1_merah(1).png[0m
+│   │                   ├── [01;35mlevel_1.png[0m
+│   │                   └── [01;35mlevel2.png[0m
+│   ├── setup.bash
+│   ├── setup.ps1
+│   ├── setup.sh
+│   └── setup.zsh
+├── [01;34mlog[0m
+│   ├── [01;34mbuild_2026-10-29_12-10-07[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_12-43-48[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_12-44-31[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_12-47-48[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_13-12-46[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_13-13-01[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_13-16-22[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_13-18-58[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_13-20-01[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_13-32-02[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_13-36-58[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_13-38-56[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_13-40-39[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_13-41-53[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-10-29_13-42-46[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-02_22-18-07[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-02_22-28-05[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-02_22-28-45[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-02_23-01-42[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-03_13-34-01[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-03_13-40-54[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-03_13-43-00[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-03_14-33-35[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-03_14-35-10[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-03_14-35-56[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-03_14-36-53[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-03_14-37-05[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-04_19-36-43[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-04_19-37-59[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-04_19-38-09[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   ├── [01;34mrobocon_2027_control[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── command.log
+│   │   │   ├── stderr.log
+│   │   │   ├── stdout.log
+│   │   │   ├── stdout_stderr.log
+│   │   │   └── streams.log
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-04_20-16-55[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-04_20-17-41[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-04_20-19-18[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-04_20-22-29[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-04_20-50-21[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-04_21-20-10[0m
+│   │   ├── events.log
+│   │   └── logger_all.log
+│   ├── [01;34mbuild_2026-11-04_21-22-08[0m
+│   │   ├── events.log
+│   │   └── logger_all.log
+│   ├── [01;34mbuild_2026-11-04_21-23-46[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-04_21-25-17[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-04_21-26-00[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-05_10-24-44[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-05_10-26-58[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-05_10-27-16[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-05_10-36-17[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── [01;34mbuild_2026-11-05_10-45-28[0m
+│   │   ├── events.log
+│   │   ├── logger_all.log
+│   │   └── [01;34mrobocon_2027_control[0m
+│   │       ├── command.log
+│   │       ├── stderr.log
+│   │       ├── stdout.log
+│   │       ├── stdout_stderr.log
+│   │       └── streams.log
+│   ├── COLCON_IGNORE
+│   ├── [01;36mlatest[0m -> [01;34mlatest_build[0m
+│   └── [01;36mlatest_build[0m -> [01;34mbuild_2026-11-05_10-45-28[0m
+├── README.md
+├── [01;34msrc[0m
+│   ├── [01;34mitsr_simulasi-2027[0m
+│   │   ├── [01;34mlaunch[0m
+│   │   │   ├── bringup.launch.py
+│   │   │   └── [01;34m__pycache__[0m
+│   │   │       └── bringup.launch.cpython-310.pyc
+│   │   ├── README.md
+│   │   ├── [01;34mrobocon_2027_description[0m
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── [01;34mlaunch[0m
+│   │   │   │   └── display.launch.py
+│   │   │   ├── package.xml
+│   │   │   ├── [01;34mrviz[0m
+│   │   │   │   ├── tr_robot.rviz
+│   │   │   │   └── tr_robot_sim.rviz
+│   │   │   └── [01;34murdf[0m
+│   │   │       └── tr.urdf.xacro
+│   │   └── [01;34mrobocon_2027_webots[0m
+│   │       ├── [01;34mcontrollers[0m
+│   │       │   └── [01;34mtr_mecanum_test[0m
+│   │       │       └── tr_mecanum_test.py
+│   │       ├── [01;34mlaunch[0m
+│   │       │   ├── simulation.launch.py
+│   │       │   └── simulation.launch.py.backup
+│   │       ├── package.xml
+│   │       ├── [01;34mprotos[0m
+│   │       │   ├── Belajar_TRRobot.proto
+│   │       │   ├── EarthBlock.proto
+│   │       │   ├── Mustika.proto
+│   │       │   ├── SkyBlock.proto
+│   │       │   └── TRRobot.proto
+│   │       ├── [01;34mresource[0m
+│   │       │   └── robocon_2027_webots
+│   │       ├── [01;34mrobocon_2027_webots[0m
+│   │       │   ├── __init__.py
+│   │       │   └── tr_webots_driver.py
+│   │       ├── setup.cfg
+│   │       ├── setup.py
+│   │       ├── [01;34murdf[0m
+│   │       │   ├── br_webots.urdf
+│   │       │   └── tr_webots.urdf
+│   │       └── [01;34mworlds[0m
+│   │           ├── simple_arena.wbt
+│   │           └── [01;34mtextures[0m
+│   │               ├── [01;35mground.png[0m
+│   │               ├── [01;35mlevel1_biru(1).png[0m
+│   │               ├── [01;35mlevel1_merah(1).png[0m
+│   │               ├── [01;35mlevel_1.png[0m
+│   │               └── [01;35mlevel2.png[0m
+│   └── [01;34mrobocon_2027_control[0m
+│       ├── package.xml
+│       ├── [01;34mresource[0m
+│       │   └── robocon_2027_control
+│       ├── [01;34mrobocon_2027_control[0m
+│       │   ├── __init__.py
+│       │   ├── keyboard_control.backup.py
+│       │   ├── keyboard_control.py
+│       │   ├── obj_detector.py
+│       │   ├── odom_movement.py
+│       │   └── pid.py
+│       ├── setup.cfg
+│       ├── setup.py
+│       └── [01;34mtest[0m
+│           ├── test_copyright.py
+│           ├── test_flake8.py
+│           └── test_pep257.py
+└── structure.txt
+
+236 directories, 693 files
