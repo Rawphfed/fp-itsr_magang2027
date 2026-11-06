@@ -35,7 +35,7 @@ class PID:
     ## Error calculation
     def _diff(self, a, b):
         diff = a - b
-        return wrap_angle(diff) if self.wrap else diff
+        return wrap_angle(diff) if self.yaw else diff
 
     ## Update value of the PID of an element
     def update(self, setpoint, measurement, dt):

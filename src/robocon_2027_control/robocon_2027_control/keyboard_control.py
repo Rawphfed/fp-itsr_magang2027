@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import rclpy
 import math
 import os
@@ -8,7 +7,6 @@ import sys
 import termios
 import time
 import tty
-
 
 from robocon_2027_control.pid import PID, wrap_angle
 from geometry_msgs.msg import Twist, PoseStamped
@@ -26,6 +24,13 @@ KEY_TIMEOUT = 0.3
 CONTROL_HZ = 20.0
 MIN_SPEED = 0.05
 
+## STUCK / REALIGN CONFIG
+STUCK_TIMEOUT = 2.0  
+DIST_PROGRESS = 0.01 
+YAW_PROGRESS = 0.05  
+REALIGN_TIMEOUT = 2.0
+YAW_SLOWDOWN = math.pi / 3 
+
 ## PID CONFIG
 # X Y
 KP = 5
@@ -33,7 +38,7 @@ KI = 0.1
 KD = 0.1
 I_LIMIT = 0.2
 # YAW
-YAW_KP = 0.5
+YAW_KP = 2
 YAW_KI = 0.0
 YAW_KD = 0.0
 YAW_I_LIMIT = 0.2
@@ -80,7 +85,8 @@ class KeyboardControl(Node):
         self.mode = "LOCAL"
 
         ## PID SETUP
-        self.pid_x, self.pid_y = PID(KP, KI, KD, o_lim=SPEED, i_lim=I_LIMIT)
+        self.pid_y = PID(KP, KI, KD, o_lim=SPEED, i_lim=I_LIMIT)
+        self.pid_x = PID(KP, KI, KD, o_lim=SPEED, i_lim=I_LIMIT)
         self.pid_yaw = PID(
             YAW_KP,
             YAW_KI,
@@ -90,6 +96,13 @@ class KeyboardControl(Node):
             yaw=True,
         )
         self.last_loop_time = time.monotonic()
+
+        ## PROGRESS CHECKER
+        self.progress_t = time.monotonic()
+        self.best_dist = float("inf")
+        self.best_yaw_err = float("inf")
+        self.realign = False
+        self.realign_t = 0.0
 
         ## POSE
         self.x = 0.0
@@ -106,7 +119,7 @@ class KeyboardControl(Node):
         self.vel_x = 0.0
         self.vel_y = 0.0
         self.vel_yaw = 0.0
-        
+
         # TICKS AND OTHERS
         self.last_key_time = time.monotonic()
 
@@ -154,6 +167,7 @@ class KeyboardControl(Node):
         self.global_vel_y = 0.0
         self.global_vel_yaw = 0.0
         self.target = None
+        self.realign = False
         self.pid_x.reset()
         self.pid_y.reset()
         self.pid_yaw.reset()
@@ -171,21 +185,33 @@ class KeyboardControl(Node):
         self.global_vel_y = msg.linear.y
         self.global_vel_yaw = msg.angular.z
         self.target = None
+        self.realign = False
         self.last_key_time = time.monotonic()
 
     def goal_callback(self, msg):
+        currentTime = time.monotonic()
+        
+        self.progress_t = currentTime
+        self.best_dist = float("inf")
+        self.best_yaw_err = float("inf")
+        self.realign = False
+
         self.set_mode("GLOBAL")
         self.pid_x.reset()
         self.pid_y.reset()
         self.pid_yaw.reset()
 
-        self.target = (
-            msg.pose.position.x,
-            msg.pose.position.y,
-            quaternion_converter(msg.pose.orientation),
-        )
-        self.last_key_time = time.monotonic()
+        # Keep current heading
+        q = msg.pose.orientation
+        if q.x == q.y == q.z == q.w == 0.0:
+            goal_yaw = self.yaw
+        else:
+            goal_yaw = quaternion_converter(q)
+
+        self.target = (msg.pose.position.x, msg.pose.position.y, goal_yaw)
+        self.last_key_time = currentTime
         self.get_logger().info(f"Target: {self.target}")
+
     ########### FOR FOXGLOVE ###########
 
     def handle_key(self, key, currentTime):
@@ -209,6 +235,7 @@ class KeyboardControl(Node):
 
         elif self.mode == "GLOBAL" and key in GLOBAL_KEYS:
             self.target = None
+            self.realign = False
             (
                 self.global_vel_x,
                 self.global_vel_y,
@@ -218,16 +245,44 @@ class KeyboardControl(Node):
 
     ## MAIN DRIVER
     def drive_to_target(self, dt):
+        currentTime = time.monotonic()
         dx = self.target[0] - self.x
         dy = self.target[1] - self.y
         yaw_error = wrap_angle(self.target[2] - self.yaw)
+        dist = math.hypot(dx, dy)
 
-        if math.hypot(dx, dy) <= DIST_TOL and abs(yaw_error) <= YAW_TOL:
+        if self.realign:
+            self.vel_x = 0.0
+            self.vel_y = 0.0
+            self.vel_yaw = self.pid_yaw.update(self.target[2], self.yaw, dt)
+            if abs(yaw_error) <= YAW_TOL or currentTime - self.realign_t > REALIGN_TIMEOUT:
+                self.stop()
+            return
+
+        if dist <= DIST_TOL and abs(yaw_error) <= YAW_TOL:
             self.stop()
+            return
+
+        yaw_abs = abs(yaw_error)
+        if (
+            dist < self.best_dist - DIST_PROGRESS
+            or yaw_abs < self.best_yaw_err - YAW_PROGRESS
+        ):
+            self.best_dist = min(self.best_dist, dist)
+            self.best_yaw_err = min(self.best_yaw_err, yaw_abs)
+            self.progress_t = currentTime
+        elif currentTime - self.progress_t > STUCK_TIMEOUT:
+            self.get_logger().warn("Blocked, realigning heading")
+            self.realign = True
+            self.realign_t = currentTime
+            self.pid_yaw.reset()
             return
 
         vx_world = self.pid_x.update(self.target[0], self.x, dt)
         vy_world = self.pid_y.update(self.target[1], self.y, dt)
+
+        if yaw_abs > YAW_SLOWDOWN:   
+            vx_world = vy_world = 0.0
 
         speed = math.hypot(vx_world, vy_world)
         if speed > SPEED:
@@ -236,7 +291,13 @@ class KeyboardControl(Node):
 
         self.vel_x, self.vel_y = self.world_to_body(vx_world, vy_world)
         self.vel_yaw = self.pid_yaw.update(self.target[2], self.yaw, dt)
-    
+        
+        self.get_logger().info(
+            f"yaw={self.yaw:.2f} target={self.target[2]:.2f} "
+            f"err={yaw_error:.2f} cmd_w={self.vel_yaw:.2f}",
+            throttle_duration_sec=0.2,
+        )
+
     ## MAIN LOOP
     def control_loop(self):
         currentTime = time.monotonic()

@@ -10,7 +10,6 @@ setup.py
 ../../build/robocon_2027_control/robocon_2027_control.egg-info/zip-safe
 resource/robocon_2027_control
 robocon_2027_control/__init__.py
-robocon_2027_control/keyboard_control.backup.py
 robocon_2027_control/keyboard_control.py
 robocon_2027_control/obj_detector.py
 robocon_2027_control/pid.py
