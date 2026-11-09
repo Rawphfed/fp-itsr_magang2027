@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import rclpy
 import math
 import os
@@ -8,7 +7,6 @@ import sys
 import termios
 import time
 import tty
-
 
 from robocon_2027_control.pid import PID, wrap_angle
 from geometry_msgs.msg import Twist, PoseStamped
@@ -103,7 +101,7 @@ class KeyboardControl(Node):
         self.progress_t = time.monotonic()
         self.best_dist = float("inf")
         self.best_yaw_err = float("inf")
-        self.realigning = False
+        self.realign = False
         self.realign_t = 0.0
 
         ## POSE
@@ -169,7 +167,7 @@ class KeyboardControl(Node):
         self.global_vel_y = 0.0
         self.global_vel_yaw = 0.0
         self.target = None
-        self.realigning = False
+        self.realign = False
         self.pid_x.reset()
         self.pid_y.reset()
         self.pid_yaw.reset()
@@ -187,23 +185,23 @@ class KeyboardControl(Node):
         self.global_vel_y = msg.linear.y
         self.global_vel_yaw = msg.angular.z
         self.target = None
-        self.realigning = False
+        self.realign = False
         self.last_key_time = time.monotonic()
 
     def goal_callback(self, msg):
-        now = time.monotonic()
-        self.progress_t = now
+        currentTime = time.monotonic()
+        
+        self.progress_t = currentTime
         self.best_dist = float("inf")
         self.best_yaw_err = float("inf")
-        self.realigning = False
+        self.realign = False
 
         self.set_mode("GLOBAL")
         self.pid_x.reset()
         self.pid_y.reset()
         self.pid_yaw.reset()
 
-        # A goal sent without orientation (all-zero quaternion) keeps the
-        # current heading instead of snapping to world yaw = 0.
+        # Keep current heading
         q = msg.pose.orientation
         if q.x == q.y == q.z == q.w == 0.0:
             goal_yaw = self.yaw
@@ -211,7 +209,7 @@ class KeyboardControl(Node):
             goal_yaw = quaternion_converter(q)
 
         self.target = (msg.pose.position.x, msg.pose.position.y, goal_yaw)
-        self.last_key_time = now
+        self.last_key_time = currentTime
         self.get_logger().info(f"Target: {self.target}")
 
     ########### FOR FOXGLOVE ###########
@@ -237,7 +235,7 @@ class KeyboardControl(Node):
 
         elif self.mode == "GLOBAL" and key in GLOBAL_KEYS:
             self.target = None
-            self.realigning = False
+            self.realign = False
             (
                 self.global_vel_x,
                 self.global_vel_y,
@@ -247,17 +245,17 @@ class KeyboardControl(Node):
 
     ## MAIN DRIVER
     def drive_to_target(self, dt):
-        now = time.monotonic()
+        currentTime = time.monotonic()
         dx = self.target[0] - self.x
         dy = self.target[1] - self.y
         yaw_error = wrap_angle(self.target[2] - self.yaw)
         dist = math.hypot(dx, dy)
 
-        if self.realigning:
+        if self.realign:
             self.vel_x = 0.0
             self.vel_y = 0.0
             self.vel_yaw = self.pid_yaw.update(self.target[2], self.yaw, dt)
-            if abs(yaw_error) <= YAW_TOL or now - self.realign_t > REALIGN_TIMEOUT:
+            if abs(yaw_error) <= YAW_TOL or currentTime - self.realign_t > REALIGN_TIMEOUT:
                 self.stop()
             return
 
@@ -272,11 +270,11 @@ class KeyboardControl(Node):
         ):
             self.best_dist = min(self.best_dist, dist)
             self.best_yaw_err = min(self.best_yaw_err, yaw_abs)
-            self.progress_t = now
-        elif now - self.progress_t > STUCK_TIMEOUT:
+            self.progress_t = currentTime
+        elif currentTime - self.progress_t > STUCK_TIMEOUT:
             self.get_logger().warn("Blocked, realigning heading")
-            self.realigning = True
-            self.realign_t = now
+            self.realign = True
+            self.realign_t = currentTime
             self.pid_yaw.reset()
             return
 

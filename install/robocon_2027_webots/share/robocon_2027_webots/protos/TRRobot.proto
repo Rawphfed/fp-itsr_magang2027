@@ -46,6 +46,16 @@ PROTO TRRobot [
         ]
       }
 
+      # Kamera depan
+      Camera {
+        translation 0.24 0 0.20
+        rotation 0 1 0 0.3
+        name "camera"
+        width 640
+        height 480
+        fieldOfView 1.0
+      }
+
       # =====================================================
       # FRONT LEFT
       # Posisi Webots:

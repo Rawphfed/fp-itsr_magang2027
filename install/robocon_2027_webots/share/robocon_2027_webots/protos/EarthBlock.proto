@@ -1,0 +1,36 @@
+
+PROTO GameBlock [
+  field SFVec3f    translation 0 0 0.05
+  field SFRotation rotation    0 0 1 0
+  field SFString   name        "game_block"
+  field SFColor    color       1 0 0        # red; use 0 0 1 for blue
+  field SFVec3f    size        0.1 0.1 0.1
+  field SFFloat    mass        0.2
+]
+{
+  Solid {
+    translation IS translation
+    rotation IS rotation
+    name IS name
+
+    children [
+      Shape {
+        appearance PBRAppearance {
+          baseColor IS color
+          roughness 1      # matte: shiny highlights wash out the HSV threshold
+          metalness 0
+        }
+        geometry DEF BLOCK_BOX Box {
+          size IS size
+        }
+      }
+    ]
+
+    boundingObject USE BLOCK_BOX
+
+    physics Physics {
+      density -1
+      mass IS mass
+    }
+  }
+}

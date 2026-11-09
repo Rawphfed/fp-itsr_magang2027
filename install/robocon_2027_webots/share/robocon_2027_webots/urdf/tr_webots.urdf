@@ -1,7 +1,13 @@
 <?xml version="1.0"?>
 <robot name="tr_robot">
   <webots>
-    <plugin
-      type="robocon_2027_webots.tr_webots_driver.TRWebotsDriver"/>
+    <device reference="camera" type="Camera">
+      <ros>
+        <enabled>true</enabled>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>20</updateRate>
+      </ros>
+    </device>
+    <plugin type="robocon_2027_webots.tr_webots_driver.TRWebotsDriver"/>
   </webots>
 </robot>
